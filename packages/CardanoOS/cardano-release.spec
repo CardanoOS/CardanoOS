@@ -9,7 +9,7 @@
 # upon. The license for this file, and modifications and additions to the
 # file, is the same license as for the pristine package itself (unless the
 # license for the pristine package is not an Open Source License, in which
-# case the license is the MIT License). An "Open Source License" is a
+# case the license is the AGPL License). An "Open Source License" is a
 # license that conforms to the Open Source Definition (Version 1.9)
 # published by the Open Source Initiative.
 
@@ -22,54 +22,35 @@ Release:        1
 Summary:        Extra Packages for openSUSE repository configuration
 Group:          System Environment/Base
 License:        AGPL
-# This is a EPEL maintained package which is specific to
-# our distribution.  Thus the source is only available from
-# within this srpm.
 	
 URL:            https://github.com/CardanoOS/
 Source0:        http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
-Source1:        GPL
-Source2:        epel.repo
-Source3:        epel-testing.repo
-# EPEL default preset policy (borrowed from fedora's 90-default.preset)
-Source4:        90-epel.preset
-BuildArch:     noarch
-Requires:      redhat-release >=  %{version}
-Conflicts:     fedora-release
+Source1:        AGPL-3.0-only
+Source2:        cardano-leap.repo
+Source3:        cardano-tumbleweed.repo
+Source4:        cardano-microos.repo
+Source5:        cardano-kubic.repo
+Source6:        cardano-factory.repo
+BuildArch:      noarch
+Requires:       redhat-release >=  %{version}
+Conflicts:      fedora-release
 %description
 	
-This package contains the Extra Packages for openSUSE Leap repository
-	
-GPG key as well as configuration for zypper.
-	
- 
+This package contains the Extra Packages for openSUSE distributions GPG key as well as configuration for zypper.
 	
 %prep
-	
+
 %setup -q  -c -T
-	
 install -pm 644 %{SOURCE0} .
-	
 install -pm 644 %{SOURCE1} .
-	
- 
-	
+
 %build
 	
- 
-	
- 
-	
 %install
-	
 rm -rf $RPM_BUILD_ROOT
-	
- 
-	
-#GPG Key
-	
+
+#GPG Key	
 install -Dpm 644 %{SOURCE0} \
-	
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 	
  
